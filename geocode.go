@@ -23,7 +23,7 @@ const (
 	ROUTE   RequestType = 2
 
 	/* Geocoding URLs */
-	GOOGLE = "http://maps.googleapis.com/maps/api/geocode/json"
+	GOOGLE = "https://maps.googleapis.com/maps/api/geocode/json"
 	OSM    = "http://open.mapquestapi.com/nominatim/v1/reverse.php"
 
 	/* Routing URLs */
@@ -59,10 +59,12 @@ type Request struct {
 	// For routing, bounds must be set
 	Bounds *Bounds // used by GOOGLE and YOURS
 
+	// Optional fields.
 	Limit    int64  // used by OSM
 	Region   string // used by GOOGLE
 	Language string // used by GOOGLE
 	Sensor   bool   // used by GOOGLE
+	Key      string // used by GOOGLE
 
 	values url.Values
 }
@@ -117,6 +119,9 @@ func (r *Request) Values() url.Values {
 		}
 		if r.Language != "" {
 			v.Set("language", r.Language)
+		}
+		if r.Key != "" {
+			v.Set("key", r.Key)
 		}
 		v.Set("sensor", strconv.FormatBool(r.Sensor))
 	case OSM:

@@ -6,8 +6,10 @@ func TestLookup(t *testing.T) {
 	req := &Request{
 		Address:  "New York City",
 		Provider: GOOGLE,
+		Key:      "YOUR_API_KEY_HERE",
 	}
 	resp, err := req.Lookup(nil)
+	t.Log(resp)
 	if err != nil {
 		t.Fatalf("Lookup error: %v", err)
 	}
@@ -51,6 +53,7 @@ func TestLookupWithLanguage(t *testing.T) {
 	req := &Request{
 		Address:  "札幌市",
 		Provider: GOOGLE,
+		Key:      "YOUR_API_KEY_HERE",
 	}
 	req.Language = "ja"
 	resp, err := req.Lookup(nil)
@@ -73,6 +76,7 @@ func TestLookupWithRegion(t *testing.T) {
 	req := &Request{
 		Address:  "Toledo",
 		Provider: GOOGLE,
+		Key:      "YOUR_API_KEY_HERE",
 	}
 	req.Region = "es"
 	resp, err := req.Lookup(nil)
@@ -85,7 +89,7 @@ func TestLookupWithRegion(t *testing.T) {
 	if l := len(resp.Results); l != 1 {
 		t.Fatalf("len(Results) == %d, want 1", l)
 	}
-	addr := "Toledo, Spain"
+	addr := "Toledo, Toledo, Spain"
 	if a := resp.Found; a != addr {
 		t.Errorf("Address == %q, want %q", a, addr)
 	}
