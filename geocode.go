@@ -345,6 +345,7 @@ type OSMAddressPart struct {
 	Name        string `json:"road"`
 	City        string `json:"city"`
 	State       string `json:"state"`
+	CountryCode string `json:"country_code"`
 }
 
 // currently doesn't
